@@ -28,6 +28,13 @@ class ShakeDetectorExample extends StatelessWidget {
             fontSize: 16,
           ),
         ),
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        )
       ),
       home: const ShakeDetectorPage(),
     );
