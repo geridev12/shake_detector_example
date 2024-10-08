@@ -5,6 +5,16 @@ import 'package:sensors_plus/sensors_plus.dart';
 typedef PhoneShakeCallback = void Function();
 
 class ShakeDetector {
+  ShakeDetector({
+    required this.onShakeStarted,
+    required this.onShakeStopped,
+    this.shakeThreshold = 2.7,
+    this.shakeIntervalMs = 500,
+    this.resetShakeCountIntervalMs = 3000,
+    this.requiredShakeCount = 1,
+    this.shakeStopTimeoutMs = 1000,
+  });
+
   final PhoneShakeCallback onShakeStarted;
   final PhoneShakeCallback onShakeStopped;
   final double shakeThreshold;
@@ -18,16 +28,6 @@ class ShakeDetector {
   Timer? _shakeStopTimer;
 
   StreamSubscription? _sensorSubscription;
-
-  ShakeDetector({
-    required this.onShakeStarted,
-    required this.onShakeStopped,
-    this.shakeThreshold = 2.7,
-    this.shakeIntervalMs = 500,
-    this.resetShakeCountIntervalMs = 3000,
-    this.requiredShakeCount = 1,
-    this.shakeStopTimeoutMs = 1000,
-  });
 
   void startListening() {
     _sensorSubscription = accelerometerEventStream().listen(
