@@ -55,7 +55,7 @@ class _ShakeDetectorPageState extends State<ShakeDetectorPage>
     } else {
       Future.delayed(
         const Duration(
-          seconds: 1,
+          seconds: 3,
         ),
         () => _animationController.reset(),
       );
