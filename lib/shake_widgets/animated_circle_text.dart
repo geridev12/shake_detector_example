@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:shake_detector_example/shake_widgets/shake_widgets.dart';
 
-class AnimatedCircleText extends StatelessWidget {
+const _initialTitle = 'Shake the phone and see what I have for you!';
+
+class AnimatedCircleText extends StatefulWidget {
   const AnimatedCircleText({
     super.key,
     required this.animation,
@@ -13,12 +15,25 @@ class AnimatedCircleText extends StatelessWidget {
   final List<String> winLooseTexts;
 
   @override
-  Widget build(BuildContext context) {
-    final isCompleted = animation.isCompleted;
-    final title = isCompleted
-        ? winLooseTexts.getRandomElement()
-        : 'Shake the phone and see what I have for you!';
+  State<AnimatedCircleText> createState() => _AnimatedCircleTextState();
+}
 
+class _AnimatedCircleTextState extends State<AnimatedCircleText> {
+  late bool isCompleted = false;
+  late String title = _initialTitle;
+
+  @override
+  void didUpdateWidget(covariant AnimatedCircleText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.animation.value != oldWidget.animation.value) {
+      isCompleted = widget.animation.isCompleted;
+      title =
+          isCompleted ? widget.winLooseTexts.getRandomElement() : _initialTitle;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -33,7 +48,7 @@ class AnimatedCircleText extends StatelessWidget {
           const SizedBox(height: 100),
           CustomPaint(
             painter: CustomCirclePainter(
-              progress: animation.value,
+              progress: widget.animation.value,
               isCompleted: isCompleted,
             ),
             child: AnimationProgressStatus(
