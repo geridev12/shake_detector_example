@@ -36,18 +36,20 @@ class AnimatedCircleText extends StatelessWidget {
               progress: animation.value,
               isCompleted: isCompleted,
             ),
-            child: isCompleted
-                ? const Center(
-                    child: Icon(
-                      Icons.check,
-                      color: Colors.black,
-                      size: 200,
-                    ),
-                  )
-                : Image.asset(
-                    'assets/phone_shake.png',
-                    color: Colors.white,
-                  ),
+            child: AnimationProgressStatus(
+              isCompleted: isCompleted,
+              isCompletedWidet: const Center(
+                child: Icon(
+                  Icons.check,
+                  color: Colors.black,
+                  size: 200,
+                ),
+              ),
+              isNotCompletedWidget: Image.asset(
+                'assets/phone_shake.png',
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),
@@ -55,6 +57,23 @@ class AnimatedCircleText extends StatelessWidget {
   }
 }
 
+class AnimationProgressStatus extends StatelessWidget {
+  const AnimationProgressStatus({
+    super.key,
+    required this.isCompleted,
+    required this.isCompletedWidet,
+    required this.isNotCompletedWidget,
+  });
+
+  final bool isCompleted;
+  final Widget isCompletedWidet;
+  final Widget isNotCompletedWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return isCompleted ? isCompletedWidet : isNotCompletedWidget;
+  }
+}
 
 extension IterableX<T> on Iterable<T> {
   T getRandomElement() => elementAt(math.Random().nextInt(length));
