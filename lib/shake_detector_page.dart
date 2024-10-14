@@ -41,7 +41,7 @@ class _ShakeDetectorPageState extends State<ShakeDetectorPage>
 
     _detector = ShakeDetector(
       onShakeStarted: () async => _onStartShaking(),
-      onShakeStopped: () => _onStopShaking(),
+      onShakeStopped: () async => _onStopShaking(),
     );
 
     _detector.startListening();
@@ -49,9 +49,9 @@ class _ShakeDetectorPageState extends State<ShakeDetectorPage>
 
   Future<void> _onStartShaking() async => _animationController.forward();
 
-  void _onStopShaking() {
+  Future<void> _onStopShaking() async {
     if (!_animation.isCompleted) {
-      _animationController.reverse();
+      await _animationController.reverse();
     } else {
       Future.delayed(
         const Duration(
