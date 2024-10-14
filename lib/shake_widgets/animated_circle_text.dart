@@ -25,11 +25,10 @@ class _AnimatedCircleTextState extends State<AnimatedCircleText> {
   @override
   void didUpdateWidget(covariant AnimatedCircleText oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.animation.value != oldWidget.animation.value) {
-      isCompleted = widget.animation.isCompleted;
-      title =
-          isCompleted ? widget.winLooseTexts.getRandomElement() : _initialTitle;
-    }
+
+    isCompleted = widget.animation.isCompleted;
+    title =
+        isCompleted ? widget.winLooseTexts.getRandomElement() : _initialTitle;
   }
 
   @override
