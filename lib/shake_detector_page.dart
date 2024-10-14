@@ -21,8 +21,8 @@ class _ShakeDetectorPageState extends State<ShakeDetectorPage>
     super.initState();
 
     _winLooseTexts = <String>[
-      'Provojeni përsëri!',
-      'Urime! Ju fituar 100 MB!',
+      'Try again!',
+      'Congratulations! You won 10 MB of data!',
     ];
 
     _animationController = AnimationController(
