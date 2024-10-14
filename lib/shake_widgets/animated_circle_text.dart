@@ -17,7 +17,7 @@ class AnimatedCircleText extends StatelessWidget {
     final isCompleted = animation.isCompleted;
     final title = isCompleted
         ? winLooseTexts.getRandomElement()
-        : 'Tunde telefonin dhe shiko se çfarë kam për ty!';
+        : 'Shake the phone and see what I have for you!';
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
