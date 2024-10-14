@@ -28,7 +28,7 @@ class _ShakeDetectorPageState extends State<ShakeDetectorPage>
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        seconds: 3,
+        seconds: 2,
       ),
     );
 
