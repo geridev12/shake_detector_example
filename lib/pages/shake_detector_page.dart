@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shake_detector_example/shake_detector.dart';
-import 'package:shake_detector_example/shake_widgets/shake_widgets.dart';
+import 'package:shake_detector_example/shake/shake_detector.dart';
+import 'package:shake_detector_example/pages/widgets/shake_widgets.dart';
 
 class ShakeDetectorPage extends StatefulWidget {
   const ShakeDetectorPage({super.key});
@@ -70,20 +70,18 @@ class _ShakeDetectorPageState extends State<ShakeDetectorPage>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shake App'),
-      ),
-      body: Center(
-        child: AnimatedBuilder(
-          animation: _animation,
-          builder: (context, _) => AnimatedCircleText(
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Shake App'),
+        ),
+        body: Center(
+          child: AnimatedBuilder(
             animation: _animation,
-            winLooseTexts: _winLooseTexts,
+            builder: (context, _) => AnimatedCircleText(
+              animation: _animation,
+              winLooseTexts: _winLooseTexts,
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

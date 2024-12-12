@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'package:shake_detector_example/shake_widgets/shake_widgets.dart';
-
-const _initialTitle = 'Shake the phone and see what I have for you!';
+import 'package:shake_detector_example/pages/widgets/shake_widgets.dart';
 
 class AnimatedCircleText extends StatefulWidget {
   const AnimatedCircleText({
@@ -19,8 +17,10 @@ class AnimatedCircleText extends StatefulWidget {
 }
 
 class _AnimatedCircleTextState extends State<AnimatedCircleText> {
+  String initialTitle = 'Shake the phone and see what I have for you!';
+
   late bool isCompleted = false;
-  late String title = _initialTitle;
+  late String title = initialTitle;
 
   @override
   void didUpdateWidget(covariant AnimatedCircleText oldWidget) {
@@ -28,47 +28,44 @@ class _AnimatedCircleTextState extends State<AnimatedCircleText> {
 
     isCompleted = widget.animation.isCompleted;
     title =
-        isCompleted ? widget.winLooseTexts.getRandomElement() : _initialTitle;
+        isCompleted ? widget.winLooseTexts.getRandomElement() : initialTitle;
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 100),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 100),
-          CustomPaint(
-            painter: CustomCirclePainter(
-              progress: widget.animation.value,
-              isCompleted: isCompleted,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 100,
+          children: [
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            child: AnimationProgressStatus(
-              isCompleted: isCompleted,
-              isCompletedWidet: const Center(
-                child: Icon(
-                  Icons.check,
-                  color: Colors.black,
-                  size: 200,
+            CustomPaint(
+              painter: CustomCirclePainter(
+                progress: widget.animation.value,
+                isCompleted: isCompleted,
+              ),
+              child: AnimationProgressStatus(
+                isCompleted: isCompleted,
+                isCompletedWidet: const Center(
+                  child: Icon(
+                    Icons.check,
+                    color: Colors.black,
+                    size: 200,
+                  ),
+                ),
+                isNotCompletedWidget: Image.asset(
+                  'assets/phone_shake.png',
+                  color: Colors.white,
                 ),
               ),
-              isNotCompletedWidget: Image.asset(
-                'assets/phone_shake.png',
-                color: Colors.white,
-              ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+          ],
+        ),
+      );
 }
 
 class AnimationProgressStatus extends StatelessWidget {
