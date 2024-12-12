@@ -14,4 +14,4 @@ In this project:
 
 | Screenshot |
 | ---------- |
-| <img src="assets/screenshots/screenshot1.png" height="400"> |
+| ![Circle Animation](assets/screenshots/screenshot1.jpeg) |
